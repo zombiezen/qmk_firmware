@@ -367,11 +367,18 @@ const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+#endif
+
 void keyboard_post_init_kb(void) {
+#ifdef RGB_MATRIX_ENABLE
+        if (rgb_matrix_get_mode() >= RGB_MATRIX_EFFECT_MAX) {
+            rgb_matrix_mode(RGB_MATRIX_NONE);
+        }
     rgb_matrix_enable_noeeprom();
+#endif
     keyboard_post_init_user();
 }
-#endif
+
 
 #if defined(AUDIO_ENABLE) && defined(MUSIC_MAP)
 // clang-format off
@@ -467,6 +474,7 @@ void matrix_init_kb(void) {
         keyboard_config.led_level_res = 0b11;
         eeconfig_update_kb(keyboard_config.raw);
     }
+
     matrix_init_user();
 }
 
