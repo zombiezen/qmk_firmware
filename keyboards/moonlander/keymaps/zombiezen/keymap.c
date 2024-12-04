@@ -94,6 +94,7 @@ bool rgb_matrix_indicators_user(void) {
   if (keyboard_config.disable_layer_led) { return false; }
   switch (biton32(layer_state)) {
     case 0:
+    case 1:
       set_layer_color(0);
       break;
     case 2:
